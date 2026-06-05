@@ -1,0 +1,63 @@
+{% extends 'layouts/analytics_base.html' %}
+{% block title %}Product Analytics — {{ app_name }}{% endblock %}
+{% block topbar_title %}Product Analytics{% endblock %}
+
+{% block content %}
+<div class="page-hero animate-in">
+  <h1>Product Analytics</h1>
+  <p>Category performance, treemap composition, and product scatter analysis</p>
+</div>
+
+<div class="row g-3 mb-4 stagger-row">
+  <div class="col-md-4">
+    <div class="kpi-card-corp glass-card">
+      <span class="kpi-label">Categories Tracked</span>
+      <span class="kpi-value">{{ kpis.categories_tracked or 0 }}</span>
+    </div>
+  </div>
+  <div class="col-md-4">
+    <div class="kpi-card-corp glass-card">
+      <span class="kpi-label">Total Category Revenue</span>
+      <span class="kpi-value">R$ {{ "{:,.0f}".format(kpis.total_category_revenue or 0) }}</span>
+    </div>
+  </div>
+  <div class="col-md-4">
+    <div class="kpi-card-corp glass-card">
+      <span class="kpi-label">Top Category</span>
+      <span class="kpi-value" style="font-size:1rem;">{{ kpis.top_category }}</span>
+    </div>
+  </div>
+</div>
+
+<div class="row stagger-row">
+  <div class="col-lg-6">
+    <div class="chart-panel glass-card animate-in" style="--delay: 0.2s">
+      <div id="chart-top_categories" class="plotly-chart"></div>
+    </div>
+  </div>
+  <div class="col-lg-6">
+    <div class="chart-panel glass-card animate-in" style="--delay: 0.28s">
+      <div id="chart-revenue_by_category" class="plotly-chart"></div>
+    </div>
+  </div>
+  <div class="col-12">
+    <div class="chart-panel glass-card animate-in" style="--delay: 0.36s">
+      <div id="chart-treemap" class="plotly-chart"></div>
+    </div>
+  </div>
+  <div class="col-lg-6">
+    <div class="chart-panel glass-card animate-in" style="--delay: 0.44s">
+      <div id="chart-scatter" class="plotly-chart"></div>
+    </div>
+  </div>
+  <div class="col-lg-6">
+    <div class="chart-panel glass-card animate-in" style="--delay: 0.52s">
+      <div id="chart-performance_matrix" class="plotly-chart"></div>
+    </div>
+  </div>
+</div>
+{% endblock %}
+
+{% block scripts %}
+<script>window.PLOTLY_CHARTS = {{ charts | tojson }};</script>
+{% endblock %}

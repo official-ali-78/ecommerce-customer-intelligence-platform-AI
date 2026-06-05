@@ -1,0 +1,82 @@
+{% extends 'layouts/analytics_base.html' %}
+{% block title %}Executive Dashboard — {{ app_name }}{% endblock %}
+{% block topbar_title %}Executive Dashboard{% endblock %}
+
+{% block content %}
+<div class="page-hero animate-in">
+  <h1>Executive Dashboard</h1>
+  <p>Corporate KPIs, revenue performance, and market distribution</p>
+</div>
+
+<div class="row g-3 mb-4 stagger-row">
+  <div class="col-6 col-md-4 col-xl-2">
+    <div class="kpi-card-corp glass-card">
+      <span class="kpi-icon"><i class="bi bi-cart-check"></i></span>
+      <span class="kpi-label">Total Orders</span>
+      <span class="kpi-value">{{ "{:,.0f}".format(kpis.total_orders or 0) }}</span>
+    </div>
+  </div>
+  <div class="col-6 col-md-4 col-xl-2">
+    <div class="kpi-card-corp glass-card">
+      <span class="kpi-icon"><i class="bi bi-people"></i></span>
+      <span class="kpi-label">Customers</span>
+      <span class="kpi-value">{{ "{:,.0f}".format(kpis.unique_customers or 0) }}</span>
+    </div>
+  </div>
+  <div class="col-6 col-md-4 col-xl-2">
+    <div class="kpi-card-corp glass-card">
+      <span class="kpi-icon"><i class="bi bi-currency-dollar"></i></span>
+      <span class="kpi-label">Product Revenue</span>
+      <span class="kpi-value">R$ {{ "{:,.0f}".format(kpis.product_revenue or 0) }}</span>
+    </div>
+  </div>
+  <div class="col-6 col-md-4 col-xl-2">
+    <div class="kpi-card-corp glass-card">
+      <span class="kpi-icon"><i class="bi bi-graph-up"></i></span>
+      <span class="kpi-label">GMV</span>
+      <span class="kpi-value">R$ {{ "{:,.0f}".format(kpis.gmv or 0) }}</span>
+    </div>
+  </div>
+  <div class="col-6 col-md-4 col-xl-2">
+    <div class="kpi-card-corp glass-card">
+      <span class="kpi-icon"><i class="bi bi-receipt"></i></span>
+      <span class="kpi-label">Avg Order Value</span>
+      <span class="kpi-value">R$ {{ "{:,.2f}".format(kpis.avg_order_value or 0) }}</span>
+    </div>
+  </div>
+  <div class="col-6 col-md-4 col-xl-2">
+    <div class="kpi-card-corp glass-card">
+      <span class="kpi-icon"><i class="bi bi-arrow-repeat"></i></span>
+      <span class="kpi-label">Repeat Rate</span>
+      <span class="kpi-value">{{ kpis.repeat_rate_pct or 0 }}%</span>
+    </div>
+  </div>
+</div>
+
+<div class="row stagger-row">
+  <div class="col-lg-6">
+    <div class="chart-panel glass-card animate-in" style="--delay: 0.2s">
+      <div id="chart-revenue_trend" class="plotly-chart"></div>
+    </div>
+  </div>
+  <div class="col-lg-6">
+    <div class="chart-panel glass-card animate-in" style="--delay: 0.28s">
+      <div id="chart-orders_trend" class="plotly-chart"></div>
+    </div>
+  </div>
+  <div class="col-lg-6">
+    <div class="chart-panel glass-card animate-in" style="--delay: 0.36s">
+      <div id="chart-top_states" class="plotly-chart"></div>
+    </div>
+  </div>
+  <div class="col-lg-6">
+    <div class="chart-panel glass-card animate-in" style="--delay: 0.44s">
+      <div id="chart-payment_methods" class="plotly-chart"></div>
+    </div>
+  </div>
+</div>
+{% endblock %}
+
+{% block scripts %}
+<script>window.PLOTLY_CHARTS = {{ charts | tojson }};</script>
+{% endblock %}

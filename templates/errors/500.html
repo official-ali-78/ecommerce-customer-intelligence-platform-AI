@@ -1,0 +1,10 @@
+{% extends 'layouts/analytics_base.html' %}
+{% block title %}Server Error — {{ app_name }}{% endblock %}
+{% block topbar_title %}Error{% endblock %}
+{% block content %}
+<section class="page-hero text-center py-5">
+  <h1>500</h1>
+  <p>Something went wrong. Please try again later.</p>
+  <a class="btn-glass btn-accent mt-3" href="{{ url_for('main.executive_dashboard') }}">Back to dashboard</a>
+</section>
+{% endblock %}

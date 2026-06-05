@@ -1,0 +1,10 @@
+{% extends 'layouts/analytics_base.html' %}
+{% block title %}Not Found — {{ app_name }}{% endblock %}
+{% block topbar_title %}404{% endblock %}
+{% block content %}
+<section class="page-hero text-center py-5">
+  <h1>404</h1>
+  <p>Page not found.</p>
+  <a class="btn-glass btn-accent mt-3" href="{{ url_for('main.executive_dashboard') }}">Back to dashboard</a>
+</section>
+{% endblock %}

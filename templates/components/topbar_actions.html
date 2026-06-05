@@ -1,0 +1,11 @@
+<div class="topbar-actions">
+  {% if export_page %}
+  <a class="btn-glass btn-accent" href="{{ url_for('main.analytics_export', page=export_page) }}" title="Export data as CSV">
+    <i class="bi bi-filetype-csv"></i>
+    <span class="btn-label">Export CSV</span>
+  </a>
+  {% endif %}
+  <button type="button" class="btn-glass btn-theme-toggle" data-theme-toggle aria-label="Toggle theme">
+    <i class="bi bi-moon-stars-fill" data-theme-icon></i>
+  </button>
+</div>

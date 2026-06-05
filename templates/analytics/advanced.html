@@ -1,0 +1,73 @@
+{% extends 'layouts/analytics_base.html' %}
+{% block title %}Advanced Analytics — {{ app_name }}{% endblock %}
+{% block topbar_title %}Advanced Analytics{% endblock %}
+
+{% block content %}
+<div class="page-hero animate-in">
+  <h1>Advanced Analytics</h1>
+  <p>Machine learning clustering, forecasting, correlation, and automated insights</p>
+</div>
+
+<div class="row g-3 mb-4 stagger-row">
+  <div class="col-md-4">
+    <div class="kpi-card-corp glass-card">
+      <span class="kpi-icon"><i class="bi bi-diagram-3"></i></span>
+      <span class="kpi-label">K-Means Clusters</span>
+      <span class="kpi-value">{{ kpis.clusters or 4 }}</span>
+    </div>
+  </div>
+  <div class="col-md-4">
+    <div class="kpi-card-corp glass-card">
+      <span class="kpi-icon"><i class="bi bi-person-lines-fill"></i></span>
+      <span class="kpi-label">Customers Analyzed</span>
+      <span class="kpi-value">{{ "{:,.0f}".format(kpis.customers_analyzed or 0) }}</span>
+    </div>
+  </div>
+  <div class="col-md-4">
+    <div class="kpi-card-corp glass-card">
+      <span class="kpi-icon"><i class="bi bi-lightbulb"></i></span>
+      <span class="kpi-label">Recommendations</span>
+      <span class="kpi-value">{{ kpis.recommendations_count or 0 }}</span>
+    </div>
+  </div>
+</div>
+
+<div class="row stagger-row">
+  <div class="col-lg-7">
+    <div class="chart-panel glass-card animate-in" style="--delay: 0.2s">
+      <div id="chart-clustering" class="plotly-chart"></div>
+    </div>
+    <div class="row">
+      <div class="col-md-6">
+        <div class="chart-panel glass-card animate-in" style="--delay: 0.3s">
+          <div id="chart-forecast" class="plotly-chart"></div>
+        </div>
+      </div>
+      <div class="col-md-6">
+        <div class="chart-panel glass-card animate-in" style="--delay: 0.38s">
+          <div id="chart-correlation" class="plotly-chart"></div>
+        </div>
+      </div>
+    </div>
+  </div>
+  <div class="col-lg-5">
+    <div class="recommendations-panel glass-card animate-in" style="--delay: 0.25s">
+      <h5 class="mb-3">Automated Business Recommendations</h5>
+      {% for rec in recommendations %}
+      <div class="recommendation-card priority-{{ rec.priority }}">
+        <h6>{{ rec.title }}
+          <span class="badge rounded-pill text-bg-secondary text-uppercase ms-1" style="font-size:0.6rem;">{{ rec.priority }}</span>
+        </h6>
+        <p class="mb-0 small">{{ rec.detail }}</p>
+      </div>
+      {% else %}
+      <p class="small text-muted">No recommendations generated.</p>
+      {% endfor %}
+    </div>
+  </div>
+</div>
+{% endblock %}
+
+{% block scripts %}
+<script>window.PLOTLY_CHARTS = {{ charts | tojson }};</script>
+{% endblock %}

@@ -1,0 +1,52 @@
+{% set analytics_nav = [
+  {'label': 'Executive Dashboard', 'endpoint': 'main.executive_dashboard', 'icon': 'bi-speedometer2'},
+  {'label': 'Customer Analytics', 'endpoint': 'main.customer_analytics', 'icon': 'bi-people'},
+  {'label': 'Product Analytics', 'endpoint': 'main.product_analytics', 'icon': 'bi-box-seam'},
+  {'label': 'Advanced Analytics', 'endpoint': 'main.advanced_analytics', 'icon': 'bi-cpu'},
+] %}
+
+<aside class="analytics-sidebar d-none d-lg-flex flex-column">
+  <div class="sidebar-brand">
+    <i class="bi bi-graph-up-arrow"></i>
+    <span>{{ app_name }}</span>
+  </div>
+  <nav class="sidebar-nav flex-grow-1">
+    <p class="sidebar-section">Dashboards</p>
+    <ul class="nav flex-column">
+      {% for item in analytics_nav %}
+      <li class="nav-item">
+        <a class="nav-link {% if request.endpoint == item.endpoint %}active{% endif %}"
+           href="{{ url_for(item.endpoint) }}">
+          <i class="bi {{ item.icon }}"></i>
+          {{ item.label }}
+        </a>
+      </li>
+      {% endfor %}
+    </ul>
+  </nav>
+  <div class="sidebar-footer d-none d-lg-block">
+    <button type="button" class="btn-glass w-100 justify-content-center" data-theme-toggle aria-label="Toggle theme">
+      <i class="bi bi-moon-stars-fill" data-theme-icon></i>
+      <span class="btn-label">Toggle theme</span>
+    </button>
+  </div>
+</aside>
+
+<div class="offcanvas offcanvas-start analytics-offcanvas d-lg-none" tabindex="-1" id="sidebarOffcanvas">
+  <div class="offcanvas-header">
+    <h5 class="offcanvas-title">{{ app_name }}</h5>
+    <button type="button" class="btn-close btn-close-white" data-bs-dismiss="offcanvas"></button>
+  </div>
+  <div class="offcanvas-body">
+    <ul class="nav flex-column">
+      {% for item in analytics_nav %}
+      <li class="nav-item">
+        <a class="nav-link {% if request.endpoint == item.endpoint %}active{% endif %}"
+           href="{{ url_for(item.endpoint) }}">
+          <i class="bi {{ item.icon }}"></i> {{ item.label }}
+        </a>
+      </li>
+      {% endfor %}
+    </ul>
+  </div>
+</div>

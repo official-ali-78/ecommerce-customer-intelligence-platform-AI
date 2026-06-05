@@ -1,0 +1,86 @@
+{% extends 'layouts/analytics_base.html' %}
+{% block title %}Customer Analytics — {{ app_name }}{% endblock %}
+{% block topbar_title %}Customer Analytics{% endblock %}
+
+{% block content %}
+<div class="page-hero animate-in">
+  <h1>Customer Analytics</h1>
+  <p>Segmentation, RFM scoring, lifetime value, and geographic distribution</p>
+</div>
+
+<div class="row g-3 mb-4 stagger-row">
+  <div class="col-6 col-md-4 col-lg-2">
+    <div class="kpi-card-corp glass-card">
+      <span class="kpi-label">Unique Customers</span>
+      <span class="kpi-value">{{ "{:,.0f}".format(kpis.unique_customers or 0) }}</span>
+    </div>
+  </div>
+  <div class="col-6 col-md-4 col-lg-2">
+    <div class="kpi-card-corp glass-card">
+      <span class="kpi-label">Repeat Customers</span>
+      <span class="kpi-value">{{ "{:,.0f}".format(kpis.repeat_customers or 0) }}</span>
+    </div>
+  </div>
+  <div class="col-6 col-md-4 col-lg-2">
+    <div class="kpi-card-corp glass-card">
+      <span class="kpi-label">Repeat Rate</span>
+      <span class="kpi-value">{{ kpis.repeat_rate_pct or 0 }}%</span>
+    </div>
+  </div>
+  <div class="col-6 col-md-4 col-lg-2">
+    <div class="kpi-card-corp glass-card">
+      <span class="kpi-label">Avg CLV</span>
+      <span class="kpi-value">R$ {{ "{:,.2f}".format(kpis.avg_clv or 0) }}</span>
+    </div>
+  </div>
+  <div class="col-6 col-md-4 col-lg-2">
+    <div class="kpi-card-corp glass-card">
+      <span class="kpi-label">Median CLV</span>
+      <span class="kpi-value">R$ {{ "{:,.2f}".format(kpis.median_clv or 0) }}</span>
+    </div>
+  </div>
+  <div class="col-6 col-md-4 col-lg-2">
+    <div class="kpi-card-corp glass-card">
+      <span class="kpi-label">Champions</span>
+      <span class="kpi-value">{{ "{:,.0f}".format(kpis.champions or 0) }}</span>
+    </div>
+  </div>
+</div>
+
+<div class="row stagger-row">
+  <div class="col-lg-4">
+    <div class="chart-panel glass-card animate-in" style="--delay: 0.2s">
+      <div id="chart-segmentation" class="plotly-chart"></div>
+    </div>
+  </div>
+  <div class="col-lg-8">
+    <div class="chart-panel glass-card animate-in" style="--delay: 0.28s">
+      <div id="chart-rfm" class="plotly-chart"></div>
+    </div>
+  </div>
+  <div class="col-lg-6">
+    <div class="chart-panel glass-card animate-in" style="--delay: 0.36s">
+      <div id="chart-clv" class="plotly-chart"></div>
+    </div>
+  </div>
+  <div class="col-lg-6">
+    <div class="chart-panel glass-card animate-in" style="--delay: 0.44s">
+      <div id="chart-repeat_customers" class="plotly-chart"></div>
+    </div>
+  </div>
+  <div class="col-lg-6">
+    <div class="chart-panel glass-card animate-in" style="--delay: 0.52s">
+      <div id="chart-state_distribution" class="plotly-chart"></div>
+    </div>
+  </div>
+  <div class="col-lg-6">
+    <div class="chart-panel glass-card animate-in" style="--delay: 0.6s">
+      <div id="chart-order_frequency" class="plotly-chart"></div>
+    </div>
+  </div>
+</div>
+{% endblock %}
+
+{% block scripts %}
+<script>window.PLOTLY_CHARTS = {{ charts | tojson }};</script>
+{% endblock %}
