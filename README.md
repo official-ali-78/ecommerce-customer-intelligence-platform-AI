@@ -57,3 +57,20 @@ sql/schema/             # Optional MySQL setup
 ```bash
 python scripts/build_sample_data.py
 ```
+A professional data analytics web application built using the Olist E-Commerce dataset.
+
+The platform provides:
+
+- Executive business dashboards
+- Customer segmentation
+- Product performance analytics
+- Revenue forecasting
+- Automated business insights
+
+The project demonstrates SQL, Python, Data Analysis, Machine Learning, and Full-Stack Development skills.
+
+results : 
+- Identified high-value customer segments
+- Analyzed customer purchase behavior
+- Forecasted future sales trends
+- Generated actionable business recommendations
